@@ -3,7 +3,10 @@
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
-  "type": "module",
+  "scripts": {
+    "start": "node -r esm index.js",
+    "start:dev": "nodemon -r esm index.js"
+  },
   "dependencies": {
     "cookie-parser": "^1.4.4",
     "dotenv": "^8.2.0",
