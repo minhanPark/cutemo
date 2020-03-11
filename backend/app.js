@@ -4,7 +4,7 @@ import cookieParser from "cookie-parser";
 import morgan from "morgan";
 import dotenv from "dotenv";
 
-import apiRouter from "./routers/api";
+import memosRouter from "./routers/memos";
 
 dotenv.config();
 
@@ -17,7 +17,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser(process.env.COOKIE_SECRET));
 
-app.use("/", apiRouter);
+app.use("/", memosRouter);
 // 404일땐 어떤 페이지를 보여줘야하지?
 app.use((req, res) => {
   res.status(404);
