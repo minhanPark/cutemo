@@ -4,10 +4,30 @@ import Joi from "@hapi/joi";
 
 const { ObjectId } = mongoose.Types;
 
-export const checkObjectId = (req, res, next) => {
+export const getMemoById = async (req, res, next) => {
   const { id } = req.params;
   if (!ObjectId.isValid(id)) {
     res.status(400).send("no!");
+  }
+  try {
+    const memo = await Memo.findById(id);
+    if (!memo) {
+      res.status(404).json({ code: 404, e: "Not Found" });
+      return;
+    }
+    req.memo = memo;
+    return next();
+  } catch (e) {
+    res.status(500).json({ code: 500, e });
+  }
+  return next();
+};
+
+export const checkOwnMemo = (req, res, next) => {
+  const { user, memo } = req;
+  if (memo.user._id.toString() !== user._id) {
+    res.status(403).json({ code: 403, e: "Unauthorized" });
+    return;
   }
   return next();
 };
@@ -29,7 +49,8 @@ export const write = async (req, res) => {
   const { title, body } = req.body;
   const memo = new Memo({
     title,
-    body
+    body,
+    user: req.user
   });
   try {
     await memo.save();
@@ -39,28 +60,33 @@ export const write = async (req, res) => {
   }
 };
 export const list = async (req, res) => {
+  // 쿼리를 통해서 페이지를 받아온다.
+  // 그래서 skip을 통해 새로운 애들을 불러와준다
+  const page = parseInt(req.params.page || "1", 10);
+
+  // 페이지가 1 이하인 말도 안되는 경우를 예방
+  if (page < 1) {
+    return res.status(400).json({ code: 400, e: "page not found" });
+  }
   try {
-    const memos = await Memo.find();
+    const memos = await Memo.find()
+      .sort({ _id: -1 })
+      .limit(10)
+      .skip((page - 1) * 10);
     // .exec()을 붙여주는 이유는 쿼리를 프로미스로 만들어주기 위해서 였지만
     // 4버전 부터는 안붙여도 프로미스로 나옴
+
+    const memoCount = await Memo.countDocuments();
+    res.cookie("Last-Page", Math.ceil(memoCount / 10));
     res.json({ memos });
   } catch (e) {
     console.log(e);
+    res.status(500).json({ code: 500, e });
   }
 };
 export const read = async (req, res) => {
-  const { id } = req.params;
-  console.log(id);
-  try {
-    const memo = await Memo.findById(id);
-    if (!memo) {
-      res.status(404).send("page not found");
-      return;
-    }
-    res.json({ memo });
-  } catch (e) {
-    console.log(e);
-  }
+  const memo = req.memo;
+  res.json({ memo });
 };
 export const remove = async (req, res) => {
   const { id } = req.params;

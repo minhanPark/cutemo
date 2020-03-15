@@ -5,15 +5,17 @@ import {
   update,
   list,
   remove,
-  checkObjectId
+  getMemoById,
+  checkOwnMemo
 } from "../controllers/memos";
+import checkLoggedIn from "../lib/checkLoggedIn";
 
 const memosRouter = express.Router();
 
 memosRouter.get("/", list);
-memosRouter.post("/", write);
-memosRouter.get("/:id", checkObjectId, read);
-memosRouter.delete("/:id", checkObjectId, remove);
-memosRouter.patch("/:id", checkObjectId, update);
+memosRouter.post("/", checkLoggedIn, write);
+memosRouter.get("/:id", getMemoById, read);
+memosRouter.delete("/:id", checkLoggedIn, getMemoById, checkOwnMemo, remove);
+memosRouter.patch("/:id", checkLoggedIn, getMemoById, checkOwnMemo, update);
 
 export default memosRouter;
