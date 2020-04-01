@@ -1,5 +1,5 @@
 import React from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import palette from "../../lib/styles/palette";
 
 const StyledButton = styled.button`
@@ -15,6 +15,22 @@ const StyledButton = styled.button`
   &:hover {
     background: ${palette.gray[6]};
   }
+  ${props =>
+    props.fullWith &&
+    css`
+      width: 100%;
+      font-size: 1.125rem;
+      padding: 0.45rem;
+    `};
+
+  ${props =>
+    props.green &&
+    css`
+      background-color: ${palette.green[2]};
+      &:hover {
+        background-color: ${palette.green[3]};
+      }
+    `}
 `;
 
 const Button = props => <StyledButton {...props} />;

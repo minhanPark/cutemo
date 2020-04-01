@@ -15,11 +15,6 @@ const WhiteWrapper = styled.div`
   background-color: white;
   position: relative;
   width: 35%;
-  &:after {
-    content: "";
-    display: block;
-    padding-bottom: 100%;
-  }
   @media screen and (max-width: 400px) {
     width: 85%;
   }
@@ -29,9 +24,7 @@ const WhiteWrapper = styled.div`
 `;
 
 const InnerWrapper = styled.div`
-  position: absolute;
   width: 100%;
-  height: 100%;
   .logo-wrapper {
     font-weight: bold;
     font-size: 2.5rem;
