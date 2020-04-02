@@ -40,19 +40,36 @@ const Footer = styled.div`
   }
 `;
 
-const Presenter = () => {
+const textMap = {
+  login: "로그인",
+  register: "회원가입"
+};
+
+const Presenter = ({ type }) => {
+  const text = textMap[type];
   return (
     <div>
-      <FormHeader>로그인</FormHeader>
+      <FormHeader>{text}</FormHeader>
       <StyledForm>
-        <StyledInput placeholder="아이디" />
-        <StyledInput placeholder="비밀번호" />
+        <StyledInput name="username" placeholder="아이디" />
+        <StyledInput name="password" type="password" placeholder="비밀번호" />
+        {type === "register" && (
+          <StyledInput
+            name="passwordConfirm"
+            type="password"
+            placeholder="비밀번호 확인"
+          />
+        )}
         <ButtonWithMarginTop fullWith green>
-          로그인
+          {text}
         </ButtonWithMarginTop>
       </StyledForm>
       <Footer>
-        <Link to="/register">회원가입</Link>
+        {type === "login" ? (
+          <Link to="/register">회원가입</Link>
+        ) : (
+          <Link to="/login">로그인</Link>
+        )}
       </Footer>
     </div>
   );
