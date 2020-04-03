@@ -42,22 +42,38 @@ const Footer = styled.div`
 
 const textMap = {
   login: "로그인",
-  register: "회원가입"
+  register: "회원가입",
 };
 
-const Presenter = ({ type }) => {
+const Presenter = ({ type, form, onChange, onSubmit }) => {
   const text = textMap[type];
   return (
     <div>
       <FormHeader>{text}</FormHeader>
-      <StyledForm>
-        <StyledInput name="username" placeholder="아이디" />
-        <StyledInput name="password" type="password" placeholder="비밀번호" />
+      <StyledForm onSubmit={onSubmit}>
+        <StyledInput
+          autoComplete="username"
+          name="username"
+          placeholder="아이디"
+          onChange={onChange}
+          value={form.username}
+        />
+        <StyledInput
+          autoComplete="new-password"
+          name="password"
+          type="password"
+          placeholder="비밀번호"
+          onChange={onChange}
+          value={form.password}
+        />
         {type === "register" && (
           <StyledInput
+            autoComplete="new-password"
             name="passwordConfirm"
             type="password"
             placeholder="비밀번호 확인"
+            onChange={onChange}
+            value={form.passwordConfirm}
           />
         )}
         <ButtonWithMarginTop fullWith green>
