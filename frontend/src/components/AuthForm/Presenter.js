@@ -40,12 +40,19 @@ const Footer = styled.div`
   }
 `;
 
+const ErrorMsg = styled.div`
+  color: red;
+  text-align: center;
+  font-size: 0.875rem;
+  margin-top: 1rem;
+`;
+
 const textMap = {
   login: "로그인",
   register: "회원가입",
 };
 
-const Presenter = ({ type, form, onChange, onSubmit }) => {
+const Presenter = ({ type, form, onChange, onSubmit, error }) => {
   const text = textMap[type];
   return (
     <div>
@@ -76,6 +83,7 @@ const Presenter = ({ type, form, onChange, onSubmit }) => {
             value={form.passwordConfirm}
           />
         )}
+        {error && <ErrorMsg>{error}</ErrorMsg>}
         <ButtonWithMarginTop fullWith green>
           {text}
         </ButtonWithMarginTop>
