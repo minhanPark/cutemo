@@ -1,11 +1,13 @@
 import React from "react";
 import Button from "../components/ButtonComponent";
+import Header from "../components/Header";
 
 const MemoListPage = () => {
   return (
-    <div>
-      <Button>버튼</Button>
-    </div>
+    <>
+      <Header />
+      <div>메모들</div>
+    </>
   );
 };
 
