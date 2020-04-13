@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import Button from "../ButtonComponent";
+import { Link } from "react-router-dom";
 
 const HeaderResponsive = styled.div`
   width: 100%;
@@ -35,9 +36,11 @@ const Presenter = () => {
     <>
       <HeaderResponsive>
         <Wrapper>
-          <div className="logo">Cutemo</div>
+          <Link to="/" className="logo">
+            Cutemo
+          </Link>
           <div className="buttons">
-            <Button>로그인</Button>
+            <Button to="/login">로그인</Button>
           </div>
         </Wrapper>
       </HeaderResponsive>
