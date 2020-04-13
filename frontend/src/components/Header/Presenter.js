@@ -31,7 +31,13 @@ const Space = styled.div`
   height: 4rem;
 `;
 
-const Presenter = () => {
+const UserInfo = styled.div`
+  margin-right: 1rem;
+  font-size: 20px;
+  font-weight: 600;
+`;
+
+const Presenter = ({ user }) => {
   return (
     <>
       <HeaderResponsive>
@@ -39,9 +45,16 @@ const Presenter = () => {
           <Link to="/" className="logo">
             Cutemo
           </Link>
-          <div className="buttons">
-            <Button to="/login">로그인</Button>
-          </div>
+          {user ? (
+            <div className="buttons">
+              <UserInfo>{user.username}</UserInfo>
+              <Button>로그아웃</Button>
+            </div>
+          ) : (
+            <div className="buttons">
+              <Button to="/login">로그인</Button>
+            </div>
+          )}
         </Wrapper>
       </HeaderResponsive>
       <Space />
