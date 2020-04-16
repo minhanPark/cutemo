@@ -6,6 +6,7 @@ const TEMP_SET_USER = "user/TEMP_SET_USER";
 const CHECK = "user/CHECK";
 const CHECK_SUCCESS = "user/CHECK_SUCCESS";
 const CHECK_FAILURE = "user/CHECK_FAILURE";
+const LOGOUT = "user/LOGOUT";
 
 export const tempSetUser = (payload) => ({
   type: TEMP_SET_USER,
@@ -33,6 +34,16 @@ function checkFailure() {
   }
 }
 
+export const logout = () => async (dispatch) => {
+  try {
+    await api.logout();
+    dispatch({ type: LOGOUT });
+    localStorage.removeItem("user");
+  } catch (e) {
+    console.log(e);
+  }
+};
+
 const initialState = {
   user: null,
   checkError: null,
@@ -57,6 +68,10 @@ export default handleActions(
         checkError: error,
       };
     },
+    [LOGOUT]: (state) => ({
+      ...state,
+      user: null,
+    }),
   },
   initialState
 );

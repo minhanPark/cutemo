@@ -40,7 +40,7 @@ const UserInfo = styled.div`
   font-weight: 600;
 `;
 
-const Presenter = ({ user }) => {
+const Presenter = ({ user, onLogout }) => {
   return (
     <>
       <HeaderResponsive>
@@ -51,7 +51,7 @@ const Presenter = ({ user }) => {
           {user ? (
             <div className="buttons">
               <UserInfo>{user.username}</UserInfo>
-              <Button>로그아웃</Button>
+              <Button onClick={onLogout}>로그아웃</Button>
             </div>
           ) : (
             <div className="buttons">
