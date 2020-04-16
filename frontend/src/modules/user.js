@@ -25,6 +25,14 @@ export const check = () => async (dispatch) => {
   }
 };
 
+function checkFailure() {
+  try {
+    localStorage.removeItem("user");
+  } catch (e) {
+    console.log("localStorage is not working");
+  }
+}
+
 const initialState = {
   user: null,
   checkError: null,
@@ -41,11 +49,14 @@ export default handleActions(
       user,
       checkError: null,
     }),
-    [CHECK_FAILURE]: (state, { payload: error }) => ({
-      ...state,
-      user: null,
-      checkError: error,
-    }),
+    [CHECK_FAILURE]: (state, { payload: error }) => {
+      checkFailure();
+      return {
+        ...state,
+        user: null,
+        checkError: error,
+      };
+    },
   },
   initialState
 );

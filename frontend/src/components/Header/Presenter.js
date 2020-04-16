@@ -25,6 +25,9 @@ const Wrapper = styled.div`
     font-size: 24px;
     font-weight: bold;
   }
+  .buttons {
+    display: flex;
+  }
 `;
 
 const Space = styled.div`
