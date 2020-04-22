@@ -1,7 +1,8 @@
 import React from "react";
+import TextForm from "../components/TextForm";
 
 const WritePage = () => {
-  return <div>글쓰기</div>;
+  return <TextForm />;
 };
 
 export default WritePage;
