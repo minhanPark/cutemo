@@ -36,12 +36,18 @@ const BodyInput = styled.textarea`
   border-bottom-right-radius: 1rem;
 `;
 
-const Presenter = () => {
+const Presenter = ({ title, body, onChange }) => {
+  const onChangeTitle = (e) => {
+    onChange({ key: "title", value: e.target.value });
+  };
+  const onChangeBody = (e) => {
+    onChange({ key: "body", value: e.target.value });
+  };
   return (
     <Wrapper>
-      <TitleInput />
+      <TitleInput value={title} onChange={onChangeTitle} />
       <div>
-        <BodyInput value="sdsdsdsdsd" />
+        <BodyInput value={body} onChange={onChangeBody} />
       </div>
     </Wrapper>
   );
