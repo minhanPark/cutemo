@@ -45,9 +45,9 @@ const Presenter = ({ title, body, onChange }) => {
   };
   return (
     <Wrapper>
-      <TitleInput value={title} onChange={onChangeTitle} />
+      <TitleInput name="title" value={title} onChange={onChangeTitle} />
       <div>
-        <BodyInput value={body} onChange={onChangeBody} />
+        <BodyInput name="body" value={body} onChange={onChangeBody} />
       </div>
     </Wrapper>
   );
