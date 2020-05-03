@@ -13,7 +13,7 @@ function App() {
       <Route component={LoginPage} path="/login" />
       <Route component={RegisterPage} path="/register" />
       <Route component={WritePage} path="/write" />
-      <Route component={MemoPage} path="/@:username/:memoId" />
+      <Route component={MemoPage} path="/:memoId" />
     </>
   );
 }

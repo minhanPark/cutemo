@@ -1,7 +1,14 @@
 import React from "react";
+import Header from "../components/Header";
+import MemoViewer from "../components/MemoViewer";
 
 const MemoPage = () => {
-  return <div>메모 읽기</div>;
+  return (
+    <>
+      <Header />
+      <MemoViewer />
+    </>
+  );
 };
 
 export default MemoPage;
