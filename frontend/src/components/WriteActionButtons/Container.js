@@ -24,9 +24,9 @@ const Container = ({ history }) => {
 
   useEffect(() => {
     if (memo) {
-      const { _id } = memo;
+      const { _id, user } = memo;
       console.log("_id is", _id);
-      history.push(`/${_id}`);
+      history.push(`/@${user.username}/${_id}`);
     }
     if (memoError) {
       console.log(memoError);

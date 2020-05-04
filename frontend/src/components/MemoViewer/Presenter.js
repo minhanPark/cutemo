@@ -30,13 +30,25 @@ const MemoBox = styled.div`
   box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
 `;
 
-const Presenter = () => {
+const Presenter = ({ memo, loading, error }) => {
+  if (error) {
+    if (error.response && error.response.status === 404) {
+      return <Wrapper>존재하지 않는 포스트입니다.</Wrapper>;
+    }
+    return <Wrapper>오류 발생!</Wrapper>;
+  }
+  if (loading || !memo) {
+    return null;
+  }
+  const { title, body, publishedDate, user } = memo;
   return (
     <Wrapper>
-      <StyledHeader>제목</StyledHeader>
-      <SubInfo>유저네임 / 2020-05-04</SubInfo>
+      <StyledHeader>{title}</StyledHeader>
+      <SubInfo>
+        {user.username} / {new Date(publishedDate).toLocaleDateString()}
+      </SubInfo>
       <MemoBox>
-        <p>sdsdsdsd</p>
+        <p>{body}</p>
       </MemoBox>
     </Wrapper>
   );

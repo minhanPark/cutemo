@@ -14,7 +14,7 @@ export const readMemo = ({ id }) => async (dispatch) => {
     const response = await api.readPost({ id });
     console.log("memo response is", response);
     // response의 어떤 부분이 들어가는 지 확인
-    dispatch({ type: READ_MEMO_SUCCESS, payload: response });
+    dispatch({ type: READ_MEMO_SUCCESS, payload: response.data.memo });
   } catch (e) {
     console.log(e);
     dispatch({ type: READ_MEMO_FAILURE, payload: e });
@@ -27,7 +27,7 @@ export const unloadMemo = () => ({
 });
 
 const initialState = {
-  post: null,
+  memo: null,
   error: null,
 };
 
@@ -35,7 +35,7 @@ const memo = handleActions(
   {
     [READ_MEMO_SUCCESS]: (state, { payload: memo }) => ({
       ...state,
-      memo,
+      memo: memo,
     }),
     [READ_MEMO_FAILURE]: (state, { payload: error }) => ({
       ...state,
