@@ -1,12 +1,12 @@
 import React from "react";
-import Button from "../components/ButtonComponent";
 import Header from "../components/Header";
+import MemoList from "../components/MemoList";
 
 const MemoListPage = () => {
   return (
     <>
       <Header />
-      <div>메모들</div>
+      <MemoList />
     </>
   );
 };
