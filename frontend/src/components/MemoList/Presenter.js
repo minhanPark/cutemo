@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import palette from "../../lib/styles/palette";
 import Button from "../ButtonComponent";
+import { Link } from "react-router-dom";
 
 const Wrapper = styled.div`
   width: 100%;
@@ -46,27 +47,43 @@ const SubInfo = styled.h4`
   margin-top: 0.25rem;
 `;
 
-const MemoItem = () => {
+const MemoItem = ({ memo }) => {
+  const { user, title, body, publishedDate, _id } = memo;
   return (
     <MemoItemBlock>
-      <StyledHeader>타이틀 타이틀</StyledHeader>
-      <SubInfo>유저네임 / 2020-05-05</SubInfo>
-      <p>이것이 메모로 남겼던 것들입니다. 확인해봥</p>
+      <Link to={`/@${user.username}/${_id}`}>
+        <StyledHeader>{title}</StyledHeader>
+      </Link>
+      <SubInfo>
+        {user.username} / {new Date(publishedDate).toLocaleDateString()}
+      </SubInfo>
+      <p>{body}</p>
     </MemoItemBlock>
   );
 };
 
-const Presenter = () => {
+const Presenter = ({ loading, error, memos, showWriteBtn }) => {
+  console.log(memos);
+  if (error) {
+    return <Wrapper>에러가 발생했습니다.</Wrapper>;
+  }
   return (
     <Wrapper>
       <BtnWrapper>
-        <Button green to="/write">
-          새 글 작성하기
-        </Button>
+        {showWriteBtn && (
+          <Button green to="/write">
+            새 글 작성하기
+          </Button>
+        )}
       </BtnWrapper>
       <MemoItemWrapper>
-        <MemoItem />
-        <MemoItem />
+        {!loading && memos && (
+          <div>
+            {memos.map((memo) => (
+              <MemoItem memo={memo} key={memo.id} />
+            ))}
+          </div>
+        )}
       </MemoItemWrapper>
     </Wrapper>
   );

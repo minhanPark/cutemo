@@ -6,13 +6,13 @@ import {
   list,
   remove,
   getMemoById,
-  checkOwnMemo
+  checkOwnMemo,
 } from "../controllers/memos";
 import checkLoggedIn from "../lib/checkLoggedIn";
 
 const memosRouter = express.Router();
 
-memosRouter.get("/", list);
+memosRouter.get("/memos", list);
 memosRouter.post("/", checkLoggedIn, write);
 memosRouter.get("/:id", getMemoById, read);
 memosRouter.delete("/:id", checkLoggedIn, getMemoById, checkOwnMemo, remove);

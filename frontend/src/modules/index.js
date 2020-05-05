@@ -4,6 +4,7 @@ import loading from "./loading";
 import user from "./user";
 import write from "./write";
 import memo from "./memo";
+import memos from "./memos";
 
 const rootReducer = combineReducers({
   auth,
@@ -11,6 +12,7 @@ const rootReducer = combineReducers({
   user,
   write,
   memo,
+  memos,
 });
 
 export default rootReducer;
