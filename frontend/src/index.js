@@ -10,6 +10,7 @@ import rootReducer from "./modules";
 import ReduxThunk from "redux-thunk";
 import { tempSetUser, check } from "./modules/user";
 import { CookiesProvider } from "react-cookie";
+import { HelmetProvider } from "react-helmet-async";
 
 const store = createStore(
   rootReducer,
@@ -32,11 +33,13 @@ loadUser();
 ReactDOM.render(
   <Provider store={store}>
     <Router>
-      <CookiesProvider>
-        <React.StrictMode>
-          <App />
-        </React.StrictMode>
-      </CookiesProvider>
+      <HelmetProvider>
+        <CookiesProvider>
+          <React.StrictMode>
+            <App />
+          </React.StrictMode>
+        </CookiesProvider>
+      </HelmetProvider>
     </Router>
   </Provider>,
   document.getElementById("root")

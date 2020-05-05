@@ -1,6 +1,7 @@
 import React from "react";
 import palette from "../../lib/styles/palette";
 import styled from "styled-components";
+import { Helmet } from "react-helmet-async";
 
 const Wrapper = styled.div`
   width: 100%;
@@ -43,6 +44,9 @@ const Presenter = ({ memo, loading, error }) => {
   const { title, body, publishedDate, user } = memo;
   return (
     <Wrapper>
+      <Helmet>
+        <title>{title}</title>
+      </Helmet>
       <StyledHeader>{title}</StyledHeader>
       <SubInfo>
         {user.username} / {new Date(publishedDate).toLocaleDateString()}
