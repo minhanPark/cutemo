@@ -23,7 +23,6 @@ export const writeMemo = ({ title, body }) => async (dispatch) => {
   dispatch({ type: WRITE_MEMO });
   try {
     const response = await api.writeMemo({ title, body });
-    console.log("write responsive is", response);
     dispatch({ type: WRITE_MEMO_SUCCESS, payload: response.data });
   } catch (e) {
     console.log(e);

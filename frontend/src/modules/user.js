@@ -17,7 +17,6 @@ export const check = () => async (dispatch) => {
   startLoading(CHECK);
   try {
     const response = await api.check();
-    console.log("check response is", response.data);
     dispatch({ type: CHECK_SUCCESS, payload: response.data.user });
   } catch (e) {
     console.log(e);

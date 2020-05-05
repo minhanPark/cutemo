@@ -5,7 +5,6 @@ import { withRouter } from "react-router-dom";
 import { writeMemo } from "../../modules/write";
 
 const Container = ({ history }) => {
-  console.log("history is", history);
   const dispatch = useDispatch();
   const { title, body, memo, memoError } = useSelector(({ write }) => ({
     title: write.title,
@@ -25,7 +24,6 @@ const Container = ({ history }) => {
   useEffect(() => {
     if (memo) {
       const { _id, user } = memo;
-      console.log("_id is", _id);
       history.push(`/@${user.username}/${_id}`);
     }
     if (memoError) {

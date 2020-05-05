@@ -39,7 +39,6 @@ export const register = ({ username, password }) => async (dispatch) => {
   startLoading(REGISTER);
   try {
     const response = await api.register({ username, password });
-    console.log("response is", response);
     dispatch({ type: REGISTER_SUCCESS, payload: response.data });
   } catch (e) {
     dispatch({ type: REGISTER_FAILURE, payload: e });
@@ -55,7 +54,6 @@ export const login = ({ username, password }) => async (dispatch) => {
   startLoading(LOGIN);
   try {
     const response = await api.login({ username, password });
-    console.log("response data is", response.data);
     dispatch({ type: REGISTER_SUCCESS, payload: response.data });
   } catch (e) {
     dispatch({ type: REGISTER_FAILURE, payload: e });

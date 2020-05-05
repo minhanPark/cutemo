@@ -63,7 +63,6 @@ const MemoItem = ({ memo }) => {
 };
 
 const Presenter = ({ loading, error, memos, showWriteBtn }) => {
-  console.log(memos);
   if (error) {
     return <Wrapper>에러가 발생했습니다.</Wrapper>;
   }

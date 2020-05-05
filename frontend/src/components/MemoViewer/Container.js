@@ -6,7 +6,6 @@ import Presenter from "./Presenter";
 
 const Container = ({ match }) => {
   const { memoId: id } = match.params;
-  console.log("memoId is", id);
   const dispatch = useDispatch();
   const { memo, error, loading } = useSelector(({ loading, memo }) => ({
     memo: memo.memo,

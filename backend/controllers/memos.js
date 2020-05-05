@@ -38,7 +38,6 @@ export const write = async (req, res) => {
     body: Joi.string().required(),
   });
   const result = schema.validate(req.body);
-  console.log(result);
   if (result.error) {
     const { error } = result;
     return res.status(400).json({ error });
@@ -60,13 +59,8 @@ export const write = async (req, res) => {
   }
 };
 export const list = async (req, res) => {
-  // 쿼리를 통해서 페이지를 받아온다.
-  // 그래서 skip을 통해 새로운 애들을 불러와준다
   const page = parseInt(req.query.page || "1", 10);
-  console.log(req.params);
-  console.log(page);
 
-  // 페이지가 1 이하인 말도 안되는 경우를 예방
   if (page < 1) {
     return res.status(400).json({ code: 400, e: "page not found" });
   }
@@ -75,8 +69,6 @@ export const list = async (req, res) => {
       .sort({ _id: -1 })
       .limit(10)
       .skip((page - 1) * 10);
-    // .exec()을 붙여주는 이유는 쿼리를 프로미스로 만들어주기 위해서 였지만
-    // 4버전 부터는 안붙여도 프로미스로 나옴
 
     const memoCount = await Memo.countDocuments();
     res.cookie("Last-Page", Math.ceil(memoCount / 10));
@@ -94,7 +86,6 @@ export const remove = async (req, res) => {
   const { id } = req.params;
   try {
     await Memo.findByIdAndRemove(id);
-    //status만 보내는건 통신이 끝나질 않는다. 실제 값을 보내줘야함
     res.status(204).send("Removed");
   } catch (e) {
     console.log(e);

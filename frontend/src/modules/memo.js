@@ -12,8 +12,6 @@ export const readMemo = ({ id }) => async (dispatch) => {
   startLoading(READ_MEMO);
   try {
     const response = await api.readPost({ id });
-    console.log("memo response is", response);
-    // response의 어떤 부분이 들어가는 지 확인
     dispatch({ type: READ_MEMO_SUCCESS, payload: response.data.memo });
   } catch (e) {
     console.log(e);

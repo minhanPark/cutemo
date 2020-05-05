@@ -6,7 +6,6 @@ import { withRouter } from "react-router-dom";
 import qs from "qs";
 
 const Container = ({ location }) => {
-  console.log("location is", location);
   const { memos, loading } = useSelector(({ memos, loading }) => ({
     memos: memos.memos,
     loading: loading["memos/READ_LISTS"],

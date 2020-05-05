@@ -10,7 +10,6 @@ export const readLists = ({ page }) => async (dispatch) => {
   startLoading(READ_LISTS);
   try {
     const response = await api.readList({ page });
-    console.log("readList response is", response);
     dispatch({ type: READ_LISTS_SUCCESS, payload: response });
   } catch (e) {
     console.log(e);

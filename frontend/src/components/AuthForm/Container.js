@@ -31,7 +31,6 @@ const Container = ({ type, history }) => {
   };
 
   const onSubmit = (e) => {
-    console.log(type);
     e.preventDefault();
     if (type === "register") {
       const { username, password, passwordConfirm } = form;
@@ -67,15 +66,12 @@ const Container = ({ type, history }) => {
       return;
     }
     if (auth) {
-      console.log(`${type === register ? "회원가입 성공" : "로그인 성공"}`);
-      console.log(auth);
       dispatch(check());
     }
   }, [auth, authError, dispatch, type]);
 
   useEffect(() => {
     if (user) {
-      console.log(user);
       history.push("/");
       try {
         localStorage.setItem("user", JSON.stringify(user));

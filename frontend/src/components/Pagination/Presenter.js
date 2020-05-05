@@ -12,7 +12,6 @@ const Wrapper = styled.div`
 const PageNum = styled.div``;
 
 const Presenter = ({ page, lastPage }) => {
-  console.log(lastPage);
   return (
     <Wrapper>
       <Button
