@@ -2,8 +2,10 @@ import React, { useEffect } from "react";
 import Presenter from "./Presenter";
 import { useDispatch, useSelector } from "react-redux";
 import { readLists } from "../../modules/memos";
+import { withRouter } from "react-router-dom";
+import qs from "qs";
 
-const Container = () => {
+const Container = ({ location }) => {
   const dispatch = useDispatch();
   const { memos, error, loading, user } = useSelector(
     ({ memos, loading, user }) => ({
@@ -14,8 +16,11 @@ const Container = () => {
     })
   );
   useEffect(() => {
-    dispatch(readLists());
-  }, [dispatch]);
+    const { page } = qs.parse(location.search, {
+      ignoreQueryPrefix: true,
+    });
+    dispatch(readLists({ page }));
+  }, [dispatch, location.search]);
   return (
     <Presenter
       loading={loading}
@@ -26,4 +31,4 @@ const Container = () => {
   );
 };
 
-export default Container;
+export default withRouter(Container);

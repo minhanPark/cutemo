@@ -35,7 +35,7 @@ export const checkOwnMemo = (req, res, next) => {
 export const write = async (req, res) => {
   const schema = Joi.object({
     title: Joi.string().required(),
-    body: Joi.string().required()
+    body: Joi.string().required(),
   });
   const result = schema.validate(req.body);
   console.log(result);
@@ -50,7 +50,7 @@ export const write = async (req, res) => {
   const memo = new Memo({
     title,
     body,
-    user: req.user
+    user: req.user,
   });
   try {
     await memo.save();
@@ -62,7 +62,9 @@ export const write = async (req, res) => {
 export const list = async (req, res) => {
   // 쿼리를 통해서 페이지를 받아온다.
   // 그래서 skip을 통해 새로운 애들을 불러와준다
-  const page = parseInt(req.params.page || "1", 10);
+  const page = parseInt(req.query.page || "1", 10);
+  console.log(req.params);
+  console.log(page);
 
   // 페이지가 1 이하인 말도 안되는 경우를 예방
   if (page < 1) {
@@ -103,7 +105,7 @@ export const update = async (req, res) => {
   const { id } = req.params;
   const schema = Joi.object({
     title: Joi.string(),
-    body: Joi.string()
+    body: Joi.string(),
   });
   const result = schema.validate(req.body);
   if (result.error) {

@@ -80,7 +80,7 @@ const Presenter = ({ loading, error, memos, showWriteBtn }) => {
         {!loading && memos && (
           <div>
             {memos.map((memo) => (
-              <MemoItem memo={memo} key={memo.id} />
+              <MemoItem memo={memo} key={memo._id} />
             ))}
           </div>
         )}

@@ -9,6 +9,7 @@ import { composeWithDevTools } from "redux-devtools-extension";
 import rootReducer from "./modules";
 import ReduxThunk from "redux-thunk";
 import { tempSetUser, check } from "./modules/user";
+import { CookiesProvider } from "react-cookie";
 
 const store = createStore(
   rootReducer,
@@ -31,9 +32,11 @@ loadUser();
 ReactDOM.render(
   <Provider store={store}>
     <Router>
-      <React.StrictMode>
-        <App />
-      </React.StrictMode>
+      <CookiesProvider>
+        <React.StrictMode>
+          <App />
+        </React.StrictMode>
+      </CookiesProvider>
     </Router>
   </Provider>,
   document.getElementById("root")

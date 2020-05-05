@@ -6,12 +6,12 @@ const READ_LISTS = "memos/READ_LISTS";
 const READ_LISTS_SUCCESS = "memos/READ_LISTS_SUCCESS";
 const READ_LISTS_FAILURE = "memos/READ_LISTS_FAILURE";
 
-export const readLists = () => async (dispatch) => {
+export const readLists = ({ page }) => async (dispatch) => {
   startLoading(READ_LISTS);
   try {
-    const response = await api.readList();
+    const response = await api.readList({ page });
     console.log("readList response is", response);
-    dispatch({ type: READ_LISTS_SUCCESS, payload: response.data.memos });
+    dispatch({ type: READ_LISTS_SUCCESS, payload: response });
   } catch (e) {
     console.log(e);
     dispatch({ type: READ_LISTS_FAILURE, payload: e });
@@ -26,9 +26,9 @@ const initialState = {
 
 const memos = handleActions(
   {
-    [READ_LISTS_SUCCESS]: (state, { payload: memos }) => ({
+    [READ_LISTS_SUCCESS]: (state, { payload: response }) => ({
       ...state,
-      memos,
+      memos: response.data.memos,
     }),
     [READ_LISTS_FAILURE]: (state, { payload: error }) => ({
       ...state,
